@@ -10,6 +10,7 @@ declare module 'rapin' {
 export declare class User {
   login(email: string, password: string, override?: boolean): string | boolean
   verify(token: string): Promise<boolean>
+  getToken(email: string, password: string, expiresIn?: number): Promise<string|boolean>
   getId(): number
   getFirstName(): string
   getMiddleName(): string
