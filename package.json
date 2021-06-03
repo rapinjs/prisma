@@ -1,0 +1,31 @@
+{
+  "name": "@rapin/prisma",
+  "version": "1.0.0",
+  "description": "Rapin Prisma",
+  "main": "lib/index.js",
+  "typings": "types/index.d.ts",
+  "repository": "https://github.com/rapinjs/prisma.git",
+  "author": "Alex Krasnij <krasaler@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "types",
+    "src"
+  ],
+  "scripts": {
+    "tslint": "tslint {src}/**/*.ts --fix",
+    "build": "rimraf lib && tsc -p ."
+  },
+  "dependencies": {
+    "@prisma/client": "^2.24.0",
+    "@types/node": "^14.0.13",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "prisma": "^2.24.0"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.5"
+  }
+}
