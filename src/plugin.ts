@@ -66,6 +66,38 @@ export class User {
     }
   }
 
+  public async getToken(email: string, password: string, expiresIn = 21600): Promise<string|boolean> {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        email
+      }
+    })
+
+    if(!user) {
+      return false
+    }
+
+    let userInfo: any
+    if(password === '') {
+      userInfo = user
+    } else {
+      const passwordHash = this.crypto.getHashPassword(password, user.salt)
+
+      userInfo = await this.prisma.user.findFirst({where: {email, password: passwordHash.hash, salt: passwordHash.salt}})
+    }
+
+    if (!isEmpty(userInfo)) {
+      const token = jwt.sign(toPlainObject(userInfo.toJSON()), process.env.SECRET_KEY, {
+        expiresIn,
+      })
+
+      return token
+    } else {
+      return false
+    }
+
+  }
+
   public async verify(token) {
     try {
       const user: any = jwt.verify(token, toString(process.env.SECRET_KEY))
