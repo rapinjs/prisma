@@ -87,7 +87,7 @@ export class User {
     }
 
     if (!isEmpty(userInfo)) {
-      const token = jwt.sign(toPlainObject(userInfo.toJSON()), process.env.SECRET_KEY, {
+      const token = jwt.sign(toPlainObject(userInfo), process.env.SECRET_KEY, {
         expiresIn,
       })
 
